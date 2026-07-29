@@ -4,9 +4,6 @@ These trace the four flows this demo exercises. "Browser (FedCM)" represents the
 internal FedCM machinery: the account chooser UI, and the fetches it makes on the RP's behalf. That's
 also why the RP and IdP columns never message each other directly.
 
-These are rendered as Mermaid. GitHub, VS Code's Markdown preview, and most Markdown tools render
-them natively; view the raw fences if yours doesn't.
-
 ## 4.1 First-time sign-in (no existing IdP session, no prior grant)
 
 ```mermaid

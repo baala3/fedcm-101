@@ -1,8 +1,8 @@
 # 2. Building the Identity Provider
 
 Everything here lives in `internal/idp`. An IdP is really just a normal web app (login form,
-sessions, a user table) plus a fixed contract of extra JSON endpoints the browser calls on the
-RP's behalf. This doc walks through that contract in the order the browser actually calls it.
+sessions, a user table) plus some JSON endpoints the browser calls on the
+RP's behalf. This doc walks through them in order browser actually calls it.
 
 > Reference: [Chrome for Developers — Implement the identity provider](https://developer.chrome.com/docs/identity/fedcm/implement/identity-provider)
 
@@ -11,10 +11,10 @@ RP's behalf. This doc walks through that contract in the order the browser actua
 **Why it exists:** an RP could point `navigator.credentials.get()` at *any* configURL, including
 one it doesn't own, to trick the browser into treating some other site as an IdP. The well-known
 file, fetched from the IdP's own origin without credentials and which must not redirect, is the IdP
-explicitly vouching "yes, this config URL is mine."
+explicitly saying "yes, this config URL is mine."
 
 **Implementation:** `internal/idp/handlers_wellknown.go`, `handleWellKnown`. Newer Chrome/Edge also
-require `accounts_endpoint` and `login_url` to be pinned here directly (not just inside the config
+require `accounts_endpoint` and `login_url` (not just inside the config
 JSON) whenever the IdP also serves `client_metadata_endpoint` (see [§1](01-fedcm-concepts.md) for
 why). Response:
 
@@ -33,8 +33,8 @@ account chooser (background color, icon).
 
 **Implementation:** `internal/idp/handlers_config.go`, `handleConfig`. This is fetched without
 credentials. We still defensively check `Sec-Fetch-Dest: webidentity` (the header Chrome/Edge
-attach to every FedCM request), even though nothing else could realistically be asking for this
-file. Response:
+attach to every FedCM request), even though nothing else could realistically be asking.
+Response:
 
 ```json
 {
@@ -154,8 +154,4 @@ Access-Control-Allow-Origin: http://localhost:8081   (the exact RP origin, not *
 Access-Control-Allow-Credentials: true               (only on the credentialed ones)
 ```
 
-See `setCORSHeaders` in `internal/idp/server.go`, called at the very top of each handler before any
-early-return error path. A response missing these headers surfaces to the RP page as a generic
-`ERR_FAILED` / "Server did not send the correct CORS headers" network error, which gives no hint
-about what actually went wrong server-side. That vagueness is exactly what makes this easy to miss
-while debugging.
+See `setCORSHeaders` in `internal/idp/server.go`

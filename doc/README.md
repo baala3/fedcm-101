@@ -1,9 +1,7 @@
 # FedCM 101: Documentation
 
-This `doc/` folder is a learning-oriented walkthrough of how [FedCM](https://developers.google.com/privacy-sandbox/fedcm)
-(Federated Credential Management) actually works. It's written against this repo's own code, so
-every concept has a real implementation to point at, not just a spec quote. Read these in order
-the first time through:
+This `doc/` folder is walkthrough of how [FedCM](https://developers.google.com/privacy-sandbox/fedcm)
+(Federated Credential Management) actually works.
 
 1. **[01-fedcm-concepts.md](01-fedcm-concepts.md)**: what FedCM is, why it exists, and the
    vocabulary (RP, IdP, mediation, Login Status API, disconnect) we use everywhere else in these
@@ -18,15 +16,4 @@ the first time through:
    the gap between it and OAuth/OIDC (no PKCE/state equivalent, no code exchange, no refresh
    tokens), and when it's genuinely worth adopting instead of just sharing a cookie.
 
-For "how do I run this," check the top-level [README.md](../README.md) instead. This folder is
-about *why* it's built this way, not setup steps.
-
-## The one-paragraph version
-
-FedCM lets a Relying Party (RP) ask the browser for a user's identity from an Identity Provider
-(IdP), without the RP and IdP ever talking to each other directly in JavaScript, and without
-third-party cookies. The RP calls `navigator.credentials.get()`, and the browser itself fetches a
-set of well-known JSON endpoints from the IdP (using the IdP's own first-party cookies, since it's
-the browser doing the fetching, not the RP's script). It shows a native account-chooser UI, then
-hands the RP back a token. Every endpoint covered below exists to make that browser-mediated
-handshake work without leaking data either side shouldn't see.
+For "how do I run this," check the top-level [README.md](../README.md) instead.

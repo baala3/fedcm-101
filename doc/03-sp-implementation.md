@@ -3,7 +3,7 @@
 Everything here lives in `internal/sp`. Unlike the IdP, the RP has no FedCM-specific *server*
 contract to satisfy. From the IdP's perspective the RP is just "some `client_id`." All the FedCM
 work on this side happens in the browser JS; the backend's job is limited to verifying whatever
-token that JS hands it, then running an ordinary cookie session from there.
+token that JS hands it, then running an ordinary cookie session.
 
 > Reference: [Chrome for Developers — Implement the relying party](https://developer.chrome.com/docs/identity/fedcm/implement/relying-party)
 
@@ -59,7 +59,7 @@ every visit. It only succeeds if:
 When any of those conditions fail, the promise rejects and we just leave the "Sign in" button
 visible. There's no special handling needed beyond catching the rejection, which is also why the UI
 shows a transient "Checking for an existing sign-in…" status that clears itself, rather than
-showing an alarming error for what's actually the expected, common case.
+showing an error.
 
 ## 3.3 Exchanging the token for a session
 
@@ -98,5 +98,4 @@ the RP's job.
   behind `navigator.credentials.get()`.
 - No polling or webhook to find out about revocation. If a user revokes the RP's access from the
   IdP's own account page (`internal/idp/handlers_home.go`, a plain HTML form outside the FedCM
-  API), the RP simply won't get a token next time it asks. There's nothing to reconcile on the RP
-  side until it re-authenticates.
+  API), the RP simply won't get a token next time it asks.

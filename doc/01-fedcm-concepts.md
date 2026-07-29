@@ -1,5 +1,14 @@
 # 1. What FedCM Is, and Why It's Shaped This Way
 
+## What is FedCM
+FedCM identitity fedarated protocol which lets a Relying Party (RP) ask the browser for a user's identity from an Identity Provider
+(IdP), without the RP and IdP ever talking to each other directly in JavaScript, and without
+third-party cookies. The RP calls `navigator.credentials.get()`, and the browser itself fetches a
+set of well-known JSON endpoints from the IdP (using the IdP's own first-party cookies, since it's
+the browser doing the fetching, not the RP's script). It shows a native account-chooser UI, then
+hands the RP back a token. Every endpoint covered below exists to make that browser-mediated
+handshake work without leaking data either side shouldn't see.
+
 ## The problem it replaces
 
 Before FedCM, "Sign in with X" buttons were built on OAuth/OIDC redirects plus third-party
@@ -11,7 +20,7 @@ user's identity across every RP that embedded it.
 
 FedCM's goal is to keep the "federated sign-in" experience while removing that tracking surface.
 It does this by moving the identity handshake **into the browser itself**, so neither side's
-JavaScript ever directly sees the other's cookies, and the browser can rate-limit or gate the
+JavaScript ever directly sees the other's cookies, and also browser can rate-limit or gate the
 whole thing behind explicit user action.
 
 ## The three parties
@@ -49,7 +58,7 @@ So the RP's JS never sees an IdP cookie, and the IdP's endpoints never see an RP
 browser hands back to the RP is an opaque token (a JWT, in this demo) that the *IdP* minted and
 the *RP* has to independently verify.
 
-## Vocabulary used throughout the other docs
+## Vocabulary
 
 | Term | Meaning |
 |---|---|
