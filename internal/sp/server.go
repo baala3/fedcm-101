@@ -41,6 +41,9 @@ func (s *Server) routes() {
 
 	r.Get("/", s.handleIndex)
 	r.Get("/profile", s.handleProfile)
+	r.Post("/session", s.handleCreateSession)
+	r.Post("/logout", s.handleLogout)
+	r.Post("/disconnected", s.handleDisconnected)
 
 	s.router = r
 }
