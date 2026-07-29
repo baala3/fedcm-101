@@ -44,6 +44,7 @@ func (s *Server) routes() {
 	r.Get("/.well-known/web-identity", s.handleWellKnown)
 	r.Get("/fedcm.json", s.handleConfig)
 	r.Get("/fedcm/client_metadata", s.handleClientMetadata)
+	r.Get("/fedcm/accounts", s.handleAccounts)
 
 	s.router = r
 }
