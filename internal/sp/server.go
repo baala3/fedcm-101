@@ -1,6 +1,7 @@
 package sp
 
 import (
+	"html/template"
 	"log"
 	"net/http"
 
@@ -17,11 +18,16 @@ const (
 
 // Server holds the SP's dependencies: the router and parsed HTML templates.
 type Server struct {
-	router *chi.Mux
+	router      *chi.Mux
+	indexTmpl   *template.Template
+	profileTmpl *template.Template
 }
 
 func NewServer() *Server {
-	srv := &Server{}
+	srv := &Server{
+		indexTmpl:   template.Must(template.ParseFiles("internal/sp/templates/index.html")),
+		profileTmpl: template.Must(template.ParseFiles("internal/sp/templates/profile.html")),
+	}
 	srv.routes()
 	return srv
 }
@@ -32,6 +38,9 @@ func (s *Server) routes() {
 
 	fileServer := http.FileServer(http.Dir("internal/sp/static"))
 	r.Handle("/static/*", http.StripPrefix("/static/", fileServer))
+
+	r.Get("/", s.handleIndex)
+	r.Get("/profile", s.handleProfile)
 
 	s.router = r
 }

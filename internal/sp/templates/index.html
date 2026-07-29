@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>FedCM Demo RP</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 420px; margin: 80px auto; color: #202124; text-align: center; }
+    h1 { font-size: 1.4rem; }
+    button { margin-top: 24px; padding: 12px 20px; background: #1a73e8; color: #fff; border: none; border-radius: 4px; font-size: 1rem; cursor: pointer; }
+    button:disabled { background: #9aa0a6; cursor: default; }
+    #status { font-size: 0.9rem; margin-top: 16px; min-height: 1.2em; }
+    #status.status-info { color: #5f6368; }
+    #status.status-error { color: #d93025; }
+  </style>
+</head>
+<body data-page="index">
+  <h1>Demo Relying Party</h1>
+  <p>Sign in using your FedCM demo identity provider.</p>
+  <button id="signin-btn">Sign in with Demo IdP</button>
+  <p id="status"></p>
+
+  <script>
+    window.FEDCM_IDP_CONFIG_URL = {{.IdPConfigURL}};
+    window.FEDCM_CLIENT_ID = {{.ClientID}};
+  </script>
+  <script src="/static/main.js"></script>
+</body>
+</html>

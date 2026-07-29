@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>FedCM Demo RP — Profile</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 420px; margin: 80px auto; color: #202124; text-align: center; }
+    img { border-radius: 50%; width: 72px; height: 72px; }
+    h1 { font-size: 1.4rem; }
+    .email { color: #5f6368; }
+    button { margin: 8px 6px 0; padding: 10px 16px; border: none; border-radius: 4px; font-size: 0.95rem; cursor: pointer; }
+    button:disabled { opacity: 0.6; cursor: default; }
+    #disconnect-btn { background: #d93025; color: #fff; }
+    #logout-btn { background: #eee; color: #202124; }
+    #status { font-size: 0.9rem; margin-top: 16px; min-height: 1.2em; }
+    #status.status-info { color: #5f6368; }
+    #status.status-error { color: #d93025; }
+  </style>
+</head>
+<body data-page="profile">
+  {{if .Picture}}<img src="{{.Picture}}" alt="">{{end}}
+  <h1>Signed in as {{.Name}}</h1>
+  <p class="email">{{.Email}}</p>
+
+  <form method="post" action="/logout" style="display:inline">
+    <button id="logout-btn" type="submit">Log out (keep consent)</button>
+  </form>
+  <button id="disconnect-btn">Disconnect from IdP</button>
+  <p id="status"></p>
+
+  <script>
+    window.FEDCM_IDP_CONFIG_URL = {{.IdPConfigURL}};
+    window.FEDCM_CLIENT_ID = {{.ClientID}};
+  </script>
+  <script src="/static/main.js"></script>
+</body>
+</html>
