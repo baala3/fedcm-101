@@ -5,6 +5,8 @@ contract to satisfy — from the IdP's perspective the RP is just "some `client_
 work on this side is in the browser JS; the backend's job is limited to verifying whatever token
 that JS hands it and running an ordinary cookie session from there.
 
+> Reference: [Chrome for Developers — Implement the relying party](https://developer.chrome.com/docs/identity/fedcm/implement/relying-party)
+
 ## 3.1 Requesting a credential
 
 **Implementation:** `internal/sp/static/main.js`, `requestCredential()` / `providerConfig()`.

@@ -4,6 +4,8 @@ Everything here lives in `internal/idp`. An IdP is really just a normal web app 
 sessions, a user table) plus a fixed contract of extra JSON endpoints the browser calls on the
 RP's behalf. This doc goes through that contract in the order the browser actually calls it.
 
+> Reference: [Chrome for Developers — Implement the identity provider](https://developer.chrome.com/docs/identity/fedcm/implement/identity-provider)
+
 ## 2.1 `/.well-known/web-identity` — proving ownership of the config URL
 
 **Why it exists:** an RP could try to point `navigator.credentials.get()` at *any* configURL,

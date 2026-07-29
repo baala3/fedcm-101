@@ -30,7 +30,7 @@ sequenceDiagram
     FedCM->>IdP: opens login_url in popup (GET /login)
     IdP-->>User: login form
     User->>IdP: POST /login (username, password)
-    IdP-->>FedCM: Set-Cookie: idp_session; Set-Login: logged-in<br/>page calls IdentityProvider.close()
+    IdP-->>FedCM: Set-Cookie: idp_session, Set-Login: logged-in<br/>page calls IdentityProvider.close()
     FedCM->>FedCM: closes popup
 
     FedCM->>IdP: GET /fedcm/accounts (retry, with cookie)
