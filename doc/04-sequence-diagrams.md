@@ -1,11 +1,11 @@
 # 4. Sequence Diagrams
 
 These trace the four flows this demo exercises. "Browser (FedCM)" represents the browser's
-internal FedCM machinery — the account chooser UI and the fetches it makes on the RP's behalf —
-which is why the RP and IdP columns never message each other directly.
+internal FedCM machinery: the account chooser UI, and the fetches it makes on the RP's behalf. That's
+also why the RP and IdP columns never message each other directly.
 
-Rendered as Mermaid — GitHub, VS Code's Markdown preview, and most Markdown tools render these
-natively; view the raw fences if yours doesn't.
+These are rendered as Mermaid. GitHub, VS Code's Markdown preview, and most Markdown tools render
+them natively; view the raw fences if yours doesn't.
 
 ## 4.1 First-time sign-in (no existing IdP session, no prior grant)
 
@@ -113,5 +113,6 @@ sequenceDiagram
 ```
 
 This is the mirror image of §4.3: the same `grants` row can be deleted either by the RP calling
-`IdentityCredential.disconnect()`, or by the user acting directly on the IdP's own account page —
-useful when the user doesn't want to visit every RP individually to revoke access.
+`IdentityCredential.disconnect()`, or by the user acting directly on the IdP's own account page.
+The second path matters when the user doesn't want to visit every RP individually to revoke
+access.
