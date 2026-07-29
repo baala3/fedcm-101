@@ -46,6 +46,7 @@ func (s *Server) routes() {
 	r.Get("/fedcm/client_metadata", s.handleClientMetadata)
 	r.Get("/fedcm/accounts", s.handleAccounts)
 	r.Post("/fedcm/assertion", s.handleAssertion)
+	r.Post("/fedcm/disconnect", s.handleDisconnect)
 
 	s.router = r
 }
