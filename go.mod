@@ -1,4 +1,4 @@
-module fedcm-demo
+module fedcm-101
 
 go 1.25.0
 

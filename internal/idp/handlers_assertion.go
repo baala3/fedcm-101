@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"fedcm-demo/internal/jwtutil"
+	"fedcm-101/internal/jwtutil"
 )
 
 // handleAssertion serves the credentialed id_assertion_endpoint. The browser

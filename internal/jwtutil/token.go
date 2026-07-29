@@ -14,7 +14,7 @@ import (
 // DemoSharedSecret is used to sign/verify id tokens. Never do this in
 // production — it only works here because the IdP and SP are the same
 // trusted demo codebase.
-const DemoSharedSecret = "fedcm-demo-shared-secret-do-not-use-in-prod"
+const DemoSharedSecret = "fedcm-101-shared-secret-do-not-use-in-prod"
 
 const (
 	IssuerIdP = "http://localhost:8080"

@@ -3,7 +3,7 @@ package sp
 import (
 	"net/http"
 
-	"fedcm-demo/internal/jwtutil"
+	"fedcm-101/internal/jwtutil"
 )
 
 const sessionCookieName = "sp_session"

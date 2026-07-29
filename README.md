@@ -1,4 +1,4 @@
-# FedCM Local Demo
+# FedCM 101
 
 A minimal, fully local [FedCM](https://developers.google.com/privacy-sandbox/3pcd/fedcm) setup
 with two independent Go servers on `localhost`:

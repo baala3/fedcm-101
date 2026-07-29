@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"fedcm-demo/internal/jwtutil"
+	"fedcm-101/internal/jwtutil"
 )
 
 type createSessionRequest struct {

@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"fedcm-demo/internal/sp"
+	"fedcm-101/internal/sp"
 )
 
 func main() {

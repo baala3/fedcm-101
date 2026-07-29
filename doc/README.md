@@ -1,4 +1,4 @@
-# FedCM Demo — Documentation
+# FedCM 101 — Documentation
 
 This `doc/` folder is a learning-oriented walkthrough of how [FedCM](https://developers.google.com/privacy-sandbox/fedcm)
 (Federated Credential Management) actually works, written against this repo's own code so every
