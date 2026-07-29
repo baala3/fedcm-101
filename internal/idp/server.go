@@ -2,6 +2,7 @@ package idp
 
 import (
 	"database/sql"
+	"html/template"
 	"log"
 	"net/http"
 
@@ -19,17 +20,19 @@ const (
 )
 
 // Server holds the IdP's dependencies: the router, the sqlite-backed store,
-// and in-memory sessions.
+// in-memory sessions, and parsed HTML templates.
 type Server struct {
-	router   *chi.Mux
-	store    *Store
-	sessions *sessionStore
+	router    *chi.Mux
+	store     *Store
+	sessions  *sessionStore
+	loginTmpl *template.Template
 }
 
 func NewServer(db *sql.DB) *Server {
 	srv := &Server{
-		store:    NewStore(db),
-		sessions: newSessionStore(),
+		store:     NewStore(db),
+		sessions:  newSessionStore(),
+		loginTmpl: template.Must(template.ParseFiles("internal/idp/templates/login.html")),
 	}
 	srv.routes()
 	return srv
@@ -47,6 +50,10 @@ func (s *Server) routes() {
 	r.Get("/fedcm/accounts", s.handleAccounts)
 	r.Post("/fedcm/assertion", s.handleAssertion)
 	r.Post("/fedcm/disconnect", s.handleDisconnect)
+
+	r.Get("/login", s.handleLoginPage)
+	r.Post("/login", s.handleLoginSubmit)
+	r.Post("/logout", s.handleLogout)
 
 	s.router = r
 }

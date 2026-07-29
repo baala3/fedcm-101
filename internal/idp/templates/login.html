@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>FedCM Demo IdP — Sign in</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 360px; margin: 80px auto; color: #202124; }
+    h1 { font-size: 1.25rem; }
+    label { display: block; margin-top: 12px; font-size: 0.9rem; }
+    input { width: 100%; padding: 8px; margin-top: 4px; box-sizing: border-box; }
+    button { margin-top: 20px; width: 100%; padding: 10px; background: #1a73e8; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+    .error { color: #d93025; font-size: 0.9rem; }
+    .hint { color: #5f6368; font-size: 0.8rem; margin-top: 16px; }
+  </style>
+</head>
+<body>
+  <h1>FedCM Demo IdP</h1>
+  {{if .Error}}<p class="error">{{.Error}}</p>{{end}}
+  <form method="post" action="/login">
+    <label>Username
+      <input type="text" name="username" autocomplete="username" required>
+    </label>
+    <label>Password
+      <input type="password" name="password" autocomplete="current-password" required>
+    </label>
+    <button type="submit">Sign in</button>
+  </form>
+  <p class="hint">Demo users: <code>alice</code> / <code>bob</code>, password <code>password123</code>.</p>
+</body>
+</html>
