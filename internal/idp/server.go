@@ -43,8 +43,19 @@ func (s *Server) routes() {
 
 	r.Get("/.well-known/web-identity", s.handleWellKnown)
 	r.Get("/fedcm.json", s.handleConfig)
+	r.Get("/fedcm/client_metadata", s.handleClientMetadata)
 
 	s.router = r
+}
+
+// setCORSHeaders marks a response as shareable with the RP origin. FedCM's
+// credentialed endpoint fetches (accounts, assertion, disconnect) enforce
+// real CORS, so every response from them — including error responses —
+// needs this, or the browser reports a CORS failure that masks whatever the
+// endpoint actually returned.
+func setCORSHeaders(w http.ResponseWriter) {
+	w.Header().Set("Access-Control-Allow-Origin", RPOrigin)
+	w.Header().Set("Access-Control-Allow-Credentials", "true")
 }
 
 func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
