@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>FedCM Demo IdP — Account</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 420px; margin: 60px auto; color: #202124; }
+    .profile { display: flex; align-items: center; gap: 14px; }
+    .profile img { width: 56px; height: 56px; border-radius: 50%; }
+    .profile h1 { font-size: 1.15rem; margin: 0; }
+    .profile .email { color: #5f6368; font-size: 0.9rem; margin: 2px 0 0; }
+    h2 { font-size: 0.95rem; color: #5f6368; text-transform: uppercase; letter-spacing: 0.04em; margin-top: 36px; }
+    ul { list-style: none; padding: 0; margin: 12px 0; }
+    li { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #f8f9fa; border-radius: 6px; margin-bottom: 8px; }
+    .empty { color: #5f6368; font-size: 0.9rem; }
+    button { padding: 6px 12px; border: none; border-radius: 4px; font-size: 0.85rem; cursor: pointer; }
+    .revoke-btn { background: #fce8e6; color: #c5221f; }
+    .logout-form { margin-top: 32px; }
+    #logout-btn { background: #eee; color: #202124; padding: 10px 16px; }
+  </style>
+</head>
+<body>
+  <div class="profile">
+    {{if .Picture}}<img src="{{.Picture}}" alt="">{{end}}
+    <div>
+      <h1>{{.Name}}</h1>
+      <p class="email">{{.Email}}</p>
+    </div>
+  </div>
+
+  <h2>Connected apps</h2>
+  {{if .Grants}}
+    <ul>
+      {{range .Grants}}
+      <li>
+        <span>{{.}}</span>
+        <form method="post" action="/revoke">
+          <input type="hidden" name="client_id" value="{{.}}">
+          <button class="revoke-btn" type="submit">Revoke</button>
+        </form>
+      </li>
+      {{end}}
+    </ul>
+  {{else}}
+    <p class="empty">No apps connected yet. Visit <code>{{.RPOrigin}}</code> and sign in to create one.</p>
+  {{end}}
+
+  <form class="logout-form" method="post" action="/logout">
+    <button id="logout-btn" type="submit">Log out</button>
+  </form>
+</body>
+</html>

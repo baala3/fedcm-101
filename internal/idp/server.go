@@ -26,6 +26,7 @@ type Server struct {
 	store     *Store
 	sessions  *sessionStore
 	loginTmpl *template.Template
+	homeTmpl  *template.Template
 }
 
 func NewServer(db *sql.DB) *Server {
@@ -33,6 +34,7 @@ func NewServer(db *sql.DB) *Server {
 		store:     NewStore(db),
 		sessions:  newSessionStore(),
 		loginTmpl: template.Must(template.ParseFiles("internal/idp/templates/login.html")),
+		homeTmpl:  template.Must(template.ParseFiles("internal/idp/templates/home.html")),
 	}
 	srv.routes()
 	return srv
@@ -50,6 +52,9 @@ func (s *Server) routes() {
 	r.Get("/fedcm/accounts", s.handleAccounts)
 	r.Post("/fedcm/assertion", s.handleAssertion)
 	r.Post("/fedcm/disconnect", s.handleDisconnect)
+
+	r.Get("/", s.handleHome)
+	r.Post("/revoke", s.handleRevoke)
 
 	r.Get("/login", s.handleLoginPage)
 	r.Post("/login", s.handleLoginSubmit)
